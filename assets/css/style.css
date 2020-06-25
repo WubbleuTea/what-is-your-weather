@@ -1,0 +1,51 @@
+:root{
+    font-size: 62.5%;
+    font-family: 'Akronim', cursive;   
+}
+body {
+    margin: 0px;
+    background-color: rgba(0, 3, 17, 1);
+    height: 100%;
+}
+h2 {
+    color: rgba(209, 255, 255, 1);
+}
+.height-100vh {
+    height: 15vh;
+}  
+header {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    box-align: center;
+    align-items: center;
+    box-pack: center;
+    justify-content: center;
+}
+.header-background {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    height: 17vh;
+    overflow: hidden;
+}
+.header-text {
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    color: rgba(209, 255, 255, 1);
+    text-shadow: 2px 2px 8px black;
+    font-size: 10vw;
+    font-family: 'Akronim', cursive;
+}
+.dashed-border {
+    border-right: 6px dashed rgba(209, 255, 255, 1);
+}
+form {
+    text-align: center;
+}
+.label-text .input-submit{
+    padding: 1.5vh;
+
+}
