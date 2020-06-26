@@ -54,7 +54,7 @@ ul {
     margin: 0;
     text-align: center;
 }
-input[type=text], select {
+input[type=text] {
     width: 100%;
     padding: 1vh;
     margin: 8px 0;
@@ -63,6 +63,7 @@ input[type=text], select {
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 2.5vh;
+    text-align: center;
 }
 input[type=submit] {
     width: 100%;
@@ -72,7 +73,9 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
     font-size: 2vh;
-    
+}
+input[type=text]:focus {
+    border: 3px solid #555;
 }
 .previous {
     width: 100%;
@@ -86,12 +89,11 @@ input[type=submit] {
     transition-duration: 800ms;
    
 }
-
 .previous:hover {
     background: radial-gradient(rgb(220, 255, 255, 0.5) 40%, rgba(255, 226, 255, 0.5) 80%, rgba(0, 3, 17, 1) 70%);
     font-weight: bolder;
     color: rgb(255, 126, 3);
-    font-size: 3vh;
+    font-size: 2vh;
     text-shadow: 2px 2px 5px black;
 }
   
