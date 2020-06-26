@@ -37,30 +37,50 @@ var runData = function(){
     var currentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=880297035eb22848e2ca9e450c64066f";
     var fiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=880297035eb22848e2ca9e450c64066f";
 
-    // do the check here for city name!
-        // clear out input
     fetch(currentWeather).then(function(response){
         if (response.ok) {
             currentWeatherEl.innerHTML = "";
             var currentCard = document.createElement("div");
-            currentCard.className = "card current";            
+            currentCard.className = "card align-center card-padding";            
             response.json().then(function(data) {
                 //creates name h2
                 var cardName = document.createElement("div");
-                // cardName.className = "breadcrumb-item current";
-                cardName.innerHTML = "<div class='breadcrumb-item current'><h3>" + data.name + "</h3>" + 
+                // cardName.className = "breadcrumb-item align-center";
+                cardName.innerHTML = "<div class='breadcrumb-item align-center'><h3>" + data.name + "</h3>" + 
                     //why is data.weather.icon coming up undefined?
                     "<img src='http://openweathermap.org/img/wn/10d" + data.weather.icon + "@4x.png' /></div>" +
                     "<p>Temperature: " + data.main.temp.toFixed(1) + "°F</p>" +
                     "<p>Humidity: " + data.main.humidity + "%</p>" +
-                    "<p>Wind Speed: " + data.wind.speed.toFixed(1) + " MPH</p>" +
+                    "<p>Wind Speed: " + data.wind.speed.toFixed(1) + " MPH</p>";
                     //where is UV index?
                     currentCard.appendChild(cardName)
-                var cardUv = document.createElement("p");
-                cardUv.textContent=
+                // var cardUv = document.createElement("p");
+                // cardUv.textContent=
                 console.log(data.weather.icon);
                 // console.log("lat=" + data.coord.lat + ", lon=" + data.coord.lon)
-                return fetch("https://api.openweathermap.org/data/2.5/uvi?appid=880297035eb22848e2ca9e450c64066f&lat=" data.coord.lat + "&lon=" + data.coord.lon)
+                return fetch("https://api.openweathermap.org/data/2.5/uvi?appid=880297035eb22848e2ca9e450c64066f&lat=" + data.coord.lat + "&lon=" + data.coord.lon);
+            })
+            .then(function(UVresponse){
+                UVresponse.json().then(function(UVdata) {
+                    var cardUv = document.createElement("p")
+                    cardUv.textContent = "UV Index: "
+                    var cardUvNumber = document.createElement("span")
+                    cardUvNumber.textContent = UVdata.value
+                    cardUvNumber.className =""
+                    if (Math.floor(UVdata.value) <= 2) {
+                        cardUvNumber.className = "bg-primary text-white uv-number"
+                    } else if (Math.floor(UVdata.value) === 3 || Math.floor(UVdata.value) === 4 || Math.floor(UVdata.value) === 5) {
+                        cardUvNumber.className = "bg-success text-white uv-number"
+                    } else if (Math.floor(UVdata.value === 6) || Math.floor(UVdata.value === 7)) {
+                        cardUvNumber.className = "bg-warning text-dark uv-number"
+                    }else if (Math.floor(UVdata.value) === 8 || Math.floor(UVdata.value) === 9 || Math.floor(UVdata.value) === 10) {
+                        cardUvNumber.className = "bg-danger text-white uv-number"
+                    } else if (UVdata.value >=11) {
+                        cardUvNumber.className = "bg-danger text-warning uv-number"
+                    }
+                    cardUv.appendChild(cardUvNumber);
+                    currentCard.appendChild(cardUv);
+                }) 
 
              //below is the way I did it were I gave each item a variable then appended which way is better?       
 
@@ -95,7 +115,6 @@ var runData = function(){
 
 
             });
-            console.log(currentWeather);
 
         } else {
             alert("Error: " + response.message)
@@ -103,20 +122,19 @@ var runData = function(){
             return
         }
         currentWeatherEl.appendChild(currentCard);
-    });
-    // need to grab Name, todays date, an emoji, tempurature = to weather, humidity, wind speed, uv index (uv index color codes)
+        // });
+        // need to grab Name, todays date, an emoji, tempurature = to weather, humidity, wind speed, uv index (uv index color codes)
 
-    fetch(fiveDay).then(function(response){
-        if (response.ok) {
-            console.log(fiveDay);
-        } else {
-            return
-        }
-    // need to grab date, emoji = to weather, temp and humidity
-    
+        fetch(fiveDay).then(function(response){
+            if (response.ok) {
+                console.log(fiveDay);
+            } else {
+                return
+            }
+            // need to grab date, emoji = to weather, temp and humidity
+        
+        });
     });
 }
-
 //localStorage
 
-//

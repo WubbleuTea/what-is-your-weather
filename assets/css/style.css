@@ -107,7 +107,14 @@ input[type=text]:focus {
     font-size: 2vh;
     text-shadow: 2px 2px 5px black;
 }
-.current {
+.align-center {
     text-align: center;
+}
+.card-padding {
+    padding: 2vh;
+}
+.uv-number {
+    font-size: 2vh;
+    padding: .5rem;
 }
   
