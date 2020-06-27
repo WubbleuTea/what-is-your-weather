@@ -119,7 +119,7 @@ input[type=text]:focus {
 }
 .card-style {
     padding: 2vh;
-    background: rgb(223, 198, 255),
+    margin-bottom: 1vh;  
 }
 .shadow {
     border: 2px solid cornflowerblue;
@@ -140,7 +140,8 @@ input[type=text]:focus {
     padding-bottom: 1vh;
 }
 .forecast {
-    margin: auto;
+    margin: 1vh auto;
+    padding-top: 2vh;
     padding-bottom: 2vh;
 }
 .forecast-image {

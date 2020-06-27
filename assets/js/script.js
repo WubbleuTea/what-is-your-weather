@@ -6,12 +6,10 @@ var currentWeatherEl = document.getElementById("current-weather")
 var forecastEl = document.getElementById("five-day")
 var currentDate = moment().format("MMMM do, YYYY");
 
-
-
-
+// function for clicking submit
 clickedCityEl.addEventListener("click", function(event){
     event.preventDefault();
-
+    // takes the text from the textarea
     var submittedCity = document.querySelector("input[name='city']").value.trim().toLowerCase();
         //how to check if they put a real city.
         if (!submittedCity) {
@@ -21,11 +19,11 @@ clickedCityEl.addEventListener("click", function(event){
         }
     cityName = submittedCity;
     formEl.reset();
-    createCityEl();
+    createCity();
     runData();
 });
 
-var createCityEl = function() {
+var createCity = function() {
     cityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
     var addingCity = document.createElement("li");
     addingCity.className = "card previous";
@@ -64,7 +62,7 @@ var runData = function(){
                     currentCard.appendChild(cardName)
                 // var cardUv = document.createElement("p");
                 // cardUv.textContent=
-                console.log(data.weather[0].icon);
+                console.log(data.coord.lat, data.coord.lon)
                 // console.log("lat=" + data.coord.lat + ", lon=" + data.coord.lon)
                 return fetch("https://api.openweathermap.org/data/2.5/uvi?appid=880297035eb22848e2ca9e450c64066f&lat=" + data.coord.lat + "&lon=" + data.coord.lon);
             })
@@ -100,10 +98,9 @@ var runData = function(){
                     forcastresponse.json().then(function(forecastdata){
                         var forecastList = forecastdata.list 
                         for (var i = 0; i < forecastList.length; i++) {
-                        // var forecastDateName = forecastdata.list[i].dt_txt.split(" ")[0].trim()
                         var forecastDateDay = moment.unix(forecastdata.list[i].dt).format("MM/DD/YYYY")
                         var forecastDateTime = forecastdata.list[i].dt_txt.split(" ")[1].trim()
-                            if (forecastDateTime === "12:00:00") {
+                           if (forecastDateTime === "12:00:00") {
                            var forecast = document.createElement("li")
                            forecast.className = "card col-12 col-xl-2 bg-primary forecast padding-bottom" 
                            forecast.innerHTML = "<p class='text-light'>" + forecastDateDay + "</p>" +
