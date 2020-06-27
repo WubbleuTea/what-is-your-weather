@@ -48,7 +48,6 @@ var runData = function(card){
             if (card==true) {
                 createCity();
             }
-            
             currentWeatherEl.innerHTML = "";
             var currentCard = document.createElement("div");
             currentCard.className = "card align-center card-style";            
