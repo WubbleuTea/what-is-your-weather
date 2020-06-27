@@ -4,8 +4,10 @@
 }
 html {
     height: 100vh;
+    width: 100%;
 }
-body, main {
+body, 
+main {
     margin: 0px;
     background-color: rgba(0, 3, 17, 1);
     height: calc(100% - 17vh);
@@ -46,10 +48,14 @@ header {
     font-size: 10vw;
     font-family: 'Akronim', cursive;
 }
-.dashed-border {
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+/* .dashed-border {
     border-right: 6px dashed rgba(209, 255, 255, 1);
     height: 100%;
-}
+} */
 form {
     text-align: center;
 }
@@ -110,8 +116,23 @@ input[type=text]:focus {
 .align-center {
     text-align: center;
 }
-.card-padding {
+.justify-center {
+    justify-content: center;
+}
+.card-style {
     padding: 2vh;
+    background: rgb(223, 198, 255),
+}
+.shadow {
+    border: 2px solid cornflowerblue;
+    border-radius: 25px;
+    color: cornflowerblue;
+    background-blend-mode: normal;
+    background-color: cornflowerblue;
+}
+.card-title {
+    font-size: 5vh;
+    color: black;
 }
 .uv-number {
     font-size: 2vh;

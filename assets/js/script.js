@@ -4,7 +4,7 @@ var typedCity = document.getElementById("city-submit");
 var formEl = document.getElementById("city-form")
 var pastCitiesEl = document.getElementById("past-cities");
 var currentWeatherEl = document.getElementById("current-weather")
-
+var currentDate = moment().format("MMMM do, YYYY");
 
 
 
@@ -31,7 +31,14 @@ var createCityEl = function() {
     addingCity.id = cityName;
     addingCity.textContent = cityName;
     pastCitiesEl.appendChild(addingCity);
+    addingCity.addEventListener("click", function(event) {
+        event.preventDefault();
+        cityName = event.target.textContent
+        runData(cityName)
+    });
 }
+
+
 
 var runData = function(){
     var currentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=880297035eb22848e2ca9e450c64066f";
@@ -41,14 +48,14 @@ var runData = function(){
         if (response.ok) {
             currentWeatherEl.innerHTML = "";
             var currentCard = document.createElement("div");
-            currentCard.className = "card align-center card-padding";            
+            currentCard.className = "card align-center card-style";            
             response.json().then(function(data) {
                 //creates name h2
                 var cardName = document.createElement("div");
                 // cardName.className = "breadcrumb-item align-center";
-                cardName.innerHTML = "<div class='breadcrumb-item align-center'><h3>" + data.name + "</h3>" + 
+                cardName.innerHTML = "<h2 class='card-title'>Current Weather</h2><div class='breadcrumb-item justify-center'><h3>" + data.name + ":<span> " + currentDate + "</span>" +"</h3>" + 
                     //why is data.weather.icon coming up undefined?
-                    "<img src='http://openweathermap.org/img/wn/10d" + data.weather.icon + "@4x.png' /></div>" +
+                    "<img class='shadow' src='http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png' /></div>" +
                     "<p>Temperature: " + data.main.temp.toFixed(1) + "°F</p>" +
                     "<p>Humidity: " + data.main.humidity + "%</p>" +
                     "<p>Wind Speed: " + data.wind.speed.toFixed(1) + " MPH</p>";
@@ -56,7 +63,7 @@ var runData = function(){
                     currentCard.appendChild(cardName)
                 // var cardUv = document.createElement("p");
                 // cardUv.textContent=
-                console.log(data.weather.icon);
+                console.log(data.weather[0].icon);
                 // console.log("lat=" + data.coord.lat + ", lon=" + data.coord.lon)
                 return fetch("https://api.openweathermap.org/data/2.5/uvi?appid=880297035eb22848e2ca9e450c64066f&lat=" + data.coord.lat + "&lon=" + data.coord.lon);
             })
@@ -67,55 +74,29 @@ var runData = function(){
                     var cardUvNumber = document.createElement("span")
                     cardUvNumber.textContent = UVdata.value
                     cardUvNumber.className =""
-                    if (Math.floor(UVdata.value) <= 2) {
+                    if (UVdata.value < 3) {
                         cardUvNumber.className = "bg-primary text-white uv-number"
-                    } else if (Math.floor(UVdata.value) === 3 || Math.floor(UVdata.value) === 4 || Math.floor(UVdata.value) === 5) {
+                    } else if (UVdata.value >=3 && UVdata.value < 6) {
                         cardUvNumber.className = "bg-success text-white uv-number"
-                    } else if (Math.floor(UVdata.value === 6) || Math.floor(UVdata.value === 7)) {
+                    } else if (UVdata.value >= 6 && UVdata.value < 7) {
                         cardUvNumber.className = "bg-warning text-dark uv-number"
-                    }else if (Math.floor(UVdata.value) === 8 || Math.floor(UVdata.value) === 9 || Math.floor(UVdata.value) === 10) {
+                    } else if (UVdata.value >= 8 && UVdata.value < 11) {
                         cardUvNumber.className = "bg-danger text-white uv-number"
                     } else if (UVdata.value >=11) {
                         cardUvNumber.className = "bg-danger text-warning uv-number"
                     }
                     cardUv.appendChild(cardUvNumber);
                     currentCard.appendChild(cardUv);
+
+                    return fetch(fiveDay)
                 }) 
+                .then(function(forcastresponse){
+                    forcastresponse.json().then(function(forcastdata){
+                        console.log(forcastdata);
 
-             //below is the way I did it were I gave each item a variable then appended which way is better?       
-
-                // var cardName = document.createElement("h3");
-                // var weatherIcon = "";
-                // weatherIcon.innerHTML = "<img src='http://openweathermap.org/img/wn/10d' + data.weather.icon.value + 'xpng'/ >"
-                // cardName.textContent = data.name 
-                // cardName.appendChild(weatherIcon)
-
-
-                // console.log(cardName);
-                // console.log("Your weather icon is " + data.weather.icon)
-
-                // //creates temp
-                // var cardTemp =document.createElement("p");
-                // cardTemp.textContent = "Temperature: " + data.main.temp.toFixed(1) + "°F";
-                // currentCard.appendChild(cardTemp);
-                // console.log(cardTemp)
-                // console.log(data.main.temp)
-
-                // // creates humidity
-                // var cardHumidity =document.createElement("p");
-                // cardHumidity.textContent = "Humidity: " + data.main.humidity + "%"
-                // currentCard.appendChild(cardHumidity);
-                // console.log(cardHumidity);
-
-                // // creates wind speed
-                // var cardWind =document.createElement("p");
-                // cardWind.textContent = "Wind Speed: " + data.wind.speed.toFixed(1) + " MPH"
-                // currentCard.appendChild(cardWind);
-                // console.log(cardWind);
-
-
+                    })
+                })
             });
-
         } else {
             alert("Error: " + response.message)
             formEl.reset();
@@ -137,4 +118,6 @@ var runData = function(){
     });
 }
 //localStorage
+
+//eventTarget
 
