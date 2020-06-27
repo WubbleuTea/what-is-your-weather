@@ -47,15 +47,13 @@ header {
     text-shadow: 2px 2px 8px black;
     font-size: 10vw;
     font-family: 'Akronim', cursive;
+    padding-top: 3vh;
+
 }
 .row {
     margin-left: 0;
     margin-right: 0;
 }
-/* .dashed-border {
-    border-right: 6px dashed rgba(209, 255, 255, 1);
-    height: 100%;
-} */
 form {
     text-align: center;
 }

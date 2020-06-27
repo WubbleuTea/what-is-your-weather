@@ -21,41 +21,33 @@ clickedCityEl.addEventListener("click", function(event){
         } 
     cityName = submittedCity;
     formEl.reset();
-    // createCity();
-    runData();
+    //Passes true to the argument
+    runData(true);
 });
 
-// var createCity = function() {
-//     cityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
-//     var addingCity = document.createElement("li");
-//     addingCity.className = "card previous";
-//     addingCity.id = cityName;
-//     addingCity.textContent = cityName;
-//     pastCitiesEl.appendChild(addingCity);
-//     addingCity.addEventListener("click", function(event) {
-//         event.preventDefault();
-//         cityName = event.target.textContent
-//         runData(cityName)
-//     });
-// }
+var createCity = function() {
+    cityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
+    var addingCity = document.createElement("li");
+    addingCity.className = "card previous";
+    addingCity.id = cityName;
+    addingCity.textContent = cityName;
+    pastCitiesEl.appendChild(addingCity);
+    addingCity.addEventListener("click", function(event) {
+        event.preventDefault();
+        cityName = event.target.textContent
+        //Passes false to the argument so it does not create a new <li>
+        runData(false)
+    });
+}
 
-var runData = function(){
+var runData = function(card){
     var currentWeather = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=880297035eb22848e2ca9e450c64066f";
     
     fetch(currentWeather).then(function(response){
         if (response.ok) {
-            cityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
-            var addingCity = document.createElement("li");
-            addingCity.className = "card previous";
-            addingCity.id = cityName;
-            addingCity.textContent = cityName;
-            pastCitiesEl.appendChild(addingCity);
-            addingCity.addEventListener("click", function(event) {
-                event.preventDefault();
-                cityName = event.target.textContent
-                addingCity.remove();
-                runData(cityName)
-            });
+            if (card==true) {
+                createCity();
+            }
             currentWeatherEl.innerHTML = "";
             var currentCard = document.createElement("div");
             currentCard.className = "card align-center card-style";            
@@ -109,7 +101,6 @@ var runData = function(){
                             "<img class='shadow forecast-image mx-auto d-block' src='http://openweathermap.org/img/wn/" + forecastdata.daily[i].weather[0].icon + "@2x.png' />" +
                             "<p class='text-light'>Temp: " + forecastdata.daily[i].temp.max.toFixed(2) +" °F</p>" +
                             "<p class='text-light'> Humidity: " + Math.round(forecastdata.daily[i].humidity) + "%</p>";
-                            console.log(forecast)
                            document.getElementById("forecast-list").appendChild(forecast);
                         }
                     })
@@ -121,7 +112,6 @@ var runData = function(){
             formEl.reset();
             return false;
         }
-
     });
 }
 
