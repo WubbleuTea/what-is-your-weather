@@ -101,13 +101,18 @@ input[type=text]:focus {
     cursor: pointer;
     font-size: 2vh;
     background: rgb(220, 255, 255);
-    transition-duration: 800ms;
+
    
 }
-.previous:hover {
-    color:black;
-    font-size: 2vh;
-    text-shadow: 2px 2px 5px black;
+@media screen and (min-width:1035px) {
+    .previous {
+        transition-duration: 800ms;
+    }
+    .previous:hover {
+        color:black;
+        font-size: 2vh;
+        text-shadow: 2px 2px 5px black;
+    }
 }
 .align-center {
     text-align: center;
