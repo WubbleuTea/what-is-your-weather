@@ -107,9 +107,7 @@ input[type=text]:focus {
    
 }
 .previous:hover {
-    background: radial-gradient(rgb(220, 255, 255, 0.5) 40%, rgba(255, 226, 255, 0.5) 80%, rgba(0, 3, 17, 1) 70%);
-    font-weight: bolder;
-    color: rgb(255, 126, 3);
+    color:black;
     font-size: 2vh;
     text-shadow: 2px 2px 5px black;
 }
@@ -137,5 +135,16 @@ input[type=text]:focus {
 .uv-number {
     font-size: 2vh;
     padding: .5rem;
+}
+.padding-bottom {
+    padding-bottom: 1vh;
+}
+.forecast {
+    margin: auto;
+    padding-bottom: 2vh;
+}
+.forecast-image {
+    max-width: 50%;
+    text-align: center;
 }
   

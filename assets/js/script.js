@@ -1,14 +1,15 @@
 var cityName = "";
-var clickedCity = document.getElementById("city-submit");
-var typedCity = document.getElementById("city-submit");
+var clickedCityEl = document.getElementById("city-submit");
 var formEl = document.getElementById("city-form")
 var pastCitiesEl = document.getElementById("past-cities");
 var currentWeatherEl = document.getElementById("current-weather")
+var forecastEl = document.getElementById("five-day")
 var currentDate = moment().format("MMMM do, YYYY");
 
 
 
-clickedCity.addEventListener("click", function(event){
+
+clickedCityEl.addEventListener("click", function(event){
     event.preventDefault();
 
     var submittedCity = document.querySelector("input[name='city']").value.trim().toLowerCase();
@@ -87,12 +88,33 @@ var runData = function(){
                     }
                     cardUv.appendChild(cardUvNumber);
                     currentCard.appendChild(cardUv);
+                    forecastEl.innerHTML = ""
+                    forecastEl.innerHTML ="<div class='card card-style'>" +
+                        "<h2 class='card-title align-center'>Five Day Forecast</h2>"+
+                        "<ul id='forecast-list' class='row'><ul>" +
+                        "</div>"
 
                     return fetch(fiveDay)
                 }) 
                 .then(function(forcastresponse){
-                    forcastresponse.json().then(function(forcastdata){
-                        console.log(forcastdata);
+                    forcastresponse.json().then(function(forecastdata){
+                        var forecastList = forecastdata.list 
+                        for (var i = 0; i < forecastList.length; i++) {
+                        // var forecastDateName = forecastdata.list[i].dt_txt.split(" ")[0].trim()
+                        var forecastDateDay = moment.unix(forecastdata.list[i].dt).format("MM/DD/YYYY")
+                        var forecastDateTime = forecastdata.list[i].dt_txt.split(" ")[1].trim()
+                            if (forecastDateTime === "12:00:00") {
+                           var forecast = document.createElement("li")
+                           forecast.className = "card col-12 col-xl-2 bg-primary forecast padding-bottom" 
+                           forecast.innerHTML = "<p class='text-light'>" + forecastDateDay + "</p>" +
+                            "<img class='shadow forecast-image mx-auto d-block' src='http://openweathermap.org/img/wn/" + forecastdata.list[i].weather[0].icon + "@2x.png' />" +
+                            "<p class='text-light'>Temp: " + forecastdata.list[i].main.temp.toFixed(2) +" °F</p>" +
+                            "<p class='text-light'> Humidity: " + Math.round(forecastdata.list[i].main.humidity) + "%</p>";
+                            console.log(forecast)
+                           document.getElementById("forecast-list").appendChild(forecast);
+                            }
+                        }
+                        console.log(forecastdata);
 
                     })
                 })
@@ -106,18 +128,15 @@ var runData = function(){
         // });
         // need to grab Name, todays date, an emoji, tempurature = to weather, humidity, wind speed, uv index (uv index color codes)
 
-        fetch(fiveDay).then(function(response){
-            if (response.ok) {
-                console.log(fiveDay);
-            } else {
-                return
-            }
-            // need to grab date, emoji = to weather, temp and humidity
-        
-        });
+        // fetch(fiveDay).then(function(response){
+        //     if (response.ok) {
+        //         console.log(fiveDay);
+        //     } else {
+        //         return
+        //     }
+       
+        // });
     });
 }
-//localStorage
 
-//eventTarget
 
