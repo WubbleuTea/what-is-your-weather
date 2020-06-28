@@ -1,6 +1,7 @@
+/* global styling */
 :root{
     font-size: 62.5%;
-    font-family: 'Akronim', cursive;   
+    font-family: 'Times New Roman', Times, serif;   
 }
 html {
     height: 100vh;
@@ -15,6 +16,7 @@ main {
 }
 h2 {
     color: rgba(209, 255, 255, 1);
+    text-align: center
 }
 h3 {
     font-size: 5vh;
@@ -22,6 +24,22 @@ h3 {
 p {
     font-size: 2vh;
 }
+ul {
+    padding-top: 2vh;
+    padding-left: 0;
+    margin: 0;
+    text-align: center;
+}
+.align-center {
+    text-align: center;
+}
+.justify-center {
+    justify-content: center;
+}
+.padding-bottom {
+    padding-bottom: 1vh;
+}
+/* header styling */
 header {
     margin: 0;
     height: auto;
@@ -50,21 +68,17 @@ header {
     padding-top: 3vh;
 
 }
+/* updating bootstrap row margins */
 .row {
     margin-left: 0;
     margin-right: 0;
 }
+/* form styling */
 form {
     text-align: center;
 }
 .label-text .input-submit{
     padding: 1.5vh;
-}
-ul {
-    padding-top: 2vh;
-    padding-left: 0;
-    margin: 0;
-    text-align: center;
 }
 input[type=text] {
     width: 100%;
@@ -80,7 +94,8 @@ input[type=text] {
 input[type=text]:focus {
     background-color: blanchedalmond;
 }
-input[type=submit] {
+input[type=submit],
+.delete-previous {
     width: 100%;
     padding: 14px 20px;
     margin: 8px 0;
@@ -88,10 +103,22 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
     font-size: 2vh;
+    justify-content: center;
 }
 input[type=text]:focus {
     background-color: blanchedalmond;
 }
+ {
+    width: 100%;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 2vh;
+    justify-content: center;
+}
+/* previously searched city styling */
 .previous {
     width: 100%;
     padding: 14px 20px;
@@ -100,9 +127,7 @@ input[type=text]:focus {
     border-radius: 4px;
     cursor: pointer;
     font-size: 2vh;
-    background: rgb(220, 255, 255);
-
-   
+    background: rgb(220, 255, 255);   
 }
 @media screen and (min-width:1035px) {
     .previous {
@@ -114,12 +139,7 @@ input[type=text]:focus {
         text-shadow: 2px 2px 5px black;
     }
 }
-.align-center {
-    text-align: center;
-}
-.justify-center {
-    justify-content: center;
-}
+/* current and forcast weather styling */
 .card-style {
     padding: 2vh;
     margin-bottom: 1vh;  
@@ -138,9 +158,6 @@ input[type=text]:focus {
 .uv-number {
     font-size: 2vh;
     padding: .5rem;
-}
-.padding-bottom {
-    padding-bottom: 1vh;
 }
 .forecast {
     margin: 1vh auto;

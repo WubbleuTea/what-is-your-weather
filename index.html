@@ -14,32 +14,35 @@
         <img class="header-background" src="./assets/images/clouds-florida-public-domain-skies.jpg">
 
     </header>
+
     <main class="row .no-margin">
-        <div class="col-12 col-lg-3">
+        <div class="container col-12 col-lg-3">
+            <!-- submit form -->
              <form id="city-form">
                 <label for="city" class="label-text">
                     <h2>Search for a City:</h2>
                 </label> 
                 <br>
+                <!-- submit button -->
                 <div class="input-submit">
                     <input name="city" type="text" id="searched-city" name="city" class="submit">
-                    <!-- <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"></svg> -->
                     <input id="city-submit" type="submit" class="btn btn-primary">
-                    <div id="city-container"></div>
                 </div>  
+                <!-- delete button -->
+                <button id="delete-storage" type="submit" class="btn btn-danger delete-previous">Delete All Items On Page</button>
             </form>
-            
-            <ul id="past-cities">
-                <h2 class="">View past cities weather. <br>Click Below:</h2>
-            </ul>
+            <!-- list for previous searches -->
+            <h2>View past cities weather. <br>Click Below:</h2>
+                <!-- container for all previous li -->
+                <ul id="past-cities"></ul>
         </div>
-        <img src="">
-
+        <!-- weather container -->
         <div class="container col-12 col-lg-9">
             <div id="current-weather" class="padding-bottom"></div>
             <div id="five-day"></div>
         </div>
     </main>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
