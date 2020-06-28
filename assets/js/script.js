@@ -1,6 +1,7 @@
 var cityName = "";
 var cityLong = "";
 var cityLat = "";
+var citiesUsed = [];
 var clickedCityEl = document.getElementById("city-submit");
 var formEl = document.getElementById("city-form")
 var pastCitiesEl = document.getElementById("past-cities");
@@ -26,10 +27,12 @@ clickedCityEl.addEventListener("click", function(event){
 });
 
 var createCity = function() {
-    cityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
+    // if (cityName === child id of list item in past-cities)
+    cityName = cityName.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+    console.log("test " + cityName)
     var addingCity = document.createElement("li");
     addingCity.className = "card previous";
-    addingCity.id = cityName;
+    addingCity.id = cityName.toLowerCase();
     addingCity.textContent = cityName;
     pastCitiesEl.appendChild(addingCity);
     addingCity.addEventListener("click", function(event) {
@@ -45,9 +48,10 @@ var runData = function(card){
     
     fetch(currentWeather).then(function(response){
         if (response.ok) {
-            if (card==true) {
+            if (card==true && !citiesUsed.includes(cityName)) {
+                citiesUsed.push(cityName);
                 createCity();
-            }
+            } 
             currentWeatherEl.innerHTML = "";
             var currentCard = document.createElement("div");
             currentCard.className = "card align-center card-style";            
@@ -99,7 +103,7 @@ var runData = function(card){
                            forecast.className = "card col-12 col-xl-2 bg-primary forecast padding-bottom" 
                            forecast.innerHTML = "<p class='text-light'>" + forecastDateDay + "</p>" +
                             "<img class='shadow forecast-image mx-auto d-block' src='http://openweathermap.org/img/wn/" + forecastdata.daily[i].weather[0].icon + "@2x.png' />" +
-                            "<p class='text-light'>Temp: " + forecastdata.daily[i].temp.max.toFixed(2) +" °F</p>" +
+                            "<p class='text-light'>Temp: " + forecastdata.daily[i].temp.max.toFixed(2) +"°F</p>" +
                             "<p class='text-light'> Humidity: " + Math.round(forecastdata.daily[i].humidity) + "%</p>";
                            document.getElementById("forecast-list").appendChild(forecast);
                         }
