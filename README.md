@@ -1,4 +1,4 @@
-# Work Day Planner
+# Weather Checker
 
 ## Built with
     -Javascript
